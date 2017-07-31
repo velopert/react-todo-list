@@ -4,7 +4,10 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
+// 인풋과 버튼이 함께 있는 컴포넌트입니다. 
 const TodoInput = ({value, onChange, onInsert}) => {
+  
+  // 엔터키가 눌리면 onInsert 를 실행합니다.
   const handleKeyPress = (e) => {
     if(e.key === 'Enter') {
       onInsert();
