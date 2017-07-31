@@ -6,11 +6,25 @@ import TodoItem from '../TodoItem';
 const cx = classNames.bind(styles);
 
 class TodoList extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.todos !== nextProps.todos;
+  }
+  
   render() {
-    const { todos } = this.props;
+    const { todos, onToggle, onRemove } = this.props;
     const todoList = todos.map(
       todo => (
-        <TodoItem key={todo.id} done={todo.done}>{todo.text}</TodoItem>
+        <TodoItem 
+          key={todo.id} 
+          done={todo.done}
+          onToggle={()=>onToggle(todo.id)}
+          onRemove={(e)=>{ 
+            onRemove(todo.id);
+            e.stopPropagation();
+            }
+          }>
+          {todo.text}
+        </TodoItem>
       )
     )
     return (
